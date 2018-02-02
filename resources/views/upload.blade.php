@@ -1,4 +1,4 @@
-{{"This is upload blade"}}
+
 
 <form method="post" action="upload" enctype="multipart/form-data">
 Title:<br/>
