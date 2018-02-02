@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('upload', 'PhotosController@index' );
+
+Route::post('upload', 'PhotosController@upload' );
