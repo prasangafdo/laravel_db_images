@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Photo;
 use Illuminate\Http\Request;
 use DB; //Insert this to use the database
+use Illuminate\Support\Facades\Storage;//To save the data
+use Illuminate\Support\Facades\Input;
 
 class PhotosController extends Controller
 {
@@ -88,6 +90,7 @@ class PhotosController extends Controller
     public function upload(Request $request)
     {
         //
+        /*Only update the database
         $image = $request->file('image');
         $filename = $image->getClientOriginalName();//Getting the original name of the uploaded file
 
@@ -101,5 +104,15 @@ class PhotosController extends Controller
         DB::table('photos')->insert($data);//Mention the table here
 
         echo "Success";
+        */
+
+    if(Input::hasFile('image')){
+
+            echo 'Uploaded';
+            $file = Input::file('image');
+            $file->move('uploads', $file->getClientOriginalName());
+            echo '';
+        }
+        
     }
 }
