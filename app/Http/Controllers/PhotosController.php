@@ -88,7 +88,11 @@ class PhotosController extends Controller
     {
         //
         $image = $request->file('image');
-        $filename = $image->getClientOriginalName();
+        $filename = $image->getClientOriginalName();//Getting the original name of the uploaded file
+
+        $Photo = new Photo;//Calling the model
+        echo $Photo ->name = $request->name ."<br/>";//Getting the values of the fillables
+        echo $Photo ->description = $request->description ."<br/>";
         echo $filename;
     }
 }
