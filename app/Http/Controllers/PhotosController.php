@@ -106,12 +106,26 @@ class PhotosController extends Controller
         echo "Success";
         */
 
-    if(Input::hasFile('image')){
+        if(Input::hasFile('image')){
 
-            echo 'Uploaded';
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();//Getting the original name of the uploaded file
+
+            $Photo = new Photo;//Calling the model
+            $name = $Photo ->name = $request->name;//Getting the values of the fillables
+            $description = $Photo ->description = $request->description;
+
+            //Inserting part
+            $data = array('name'=>$name, 'description'=>$description, 'filename'=>$filename);//Inserting data to an array
+
+            DB::table('photos')->insert($data);//Mention the table here
+
+            echo '<h2> Uploaded </h2>';
             $file = Input::file('image');
             $file->move('uploads', $file->getClientOriginalName());
             echo '';
+
+            return view('upload');
         }
         
     }
