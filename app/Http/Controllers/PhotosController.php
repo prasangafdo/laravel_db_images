@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use Illuminate\Http\Request;
+use DB; //Insert this to use the database
 
 class PhotosController extends Controller
 {
@@ -91,8 +92,14 @@ class PhotosController extends Controller
         $filename = $image->getClientOriginalName();//Getting the original name of the uploaded file
 
         $Photo = new Photo;//Calling the model
-        echo $Photo ->name = $request->name ."<br/>";//Getting the values of the fillables
-        echo $Photo ->description = $request->description ."<br/>";
-        echo $filename;
+        $name = $Photo ->name = $request->name;//Getting the values of the fillables
+        $description = $Photo ->description = $request->description;
+
+        //Inserting part
+        $data = array('name'=>$name, 'description'=>$description, 'filename'=>$filename);//Inserting data to an array
+
+        DB::table('photos')->insert($data);//Mention the table here
+
+        echo "Success";
     }
 }
